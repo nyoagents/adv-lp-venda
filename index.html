@@ -659,8 +659,8 @@ body[data-page="light"] .progressbar{background:var(--terra)}
 /* Segunda dobra em diante só aparece no pitch (28:56); antes, a página é tarja + player */
 body:not(.adv-unlocked) #vturb-show-after-pitch{display:none!important}
 body:not(.adv-unlocked) .scta{display:none!important}
-/* oculta widget externo de checkout flutuante (nyoflux) que pode aparecer com UI de edicao */
-iframe[src*="nyoflux-bkr.web.app/s/botao-adv"]{display:none!important;visibility:hidden!important;height:0!important;width:0!important;opacity:0!important;pointer-events:none!important}
+/* oculta qualquer iframe externo injetado direto no body (widgets de terceiros tipo checkout/convite) que nao seja do vturb/converteai/facebook */
+body>iframe[title="checkout"],body>iframe[title="convite"]{display:none!important;visibility:hidden!important;height:0!important;width:0!important;opacity:0!important;pointer-events:none!important}
 </style>
 <!-- Meta Pixel · ADV (BM do Arthur) -->
 <script>
@@ -1334,5 +1334,15 @@ var _prefixDomains=["https://pay.hub.la", "https://invoice.hub.la", "https://app
   window.addEventListener('load',function(){tick();});
 })();
 </script>
+  <script>
+  /* Rede de seguranca: alguns navegadores/extensoes injetam iframes de terceiros (ex: title="checkout" ou "convite")
+     direto no body. Escondemos qualquer um desses assim que aparecem, sem tocar no restante da pagina. */
+  (function(){
+    function isRogue(n){return n.tagName==='IFRAME'&&n.parentElement===document.body&&/^(checkout|convite)$/i.test(n.title||'');}
+    function hide(n){n.style.setProperty('display','none','important');n.style.setProperty('height','0','important');n.style.setProperty('width','0','important');}
+    document.querySelectorAll('body>iframe').forEach(function(n){if(isRogue(n))hide(n);});
+    new MutationObserver(function(muts){muts.forEach(function(m){(m.addedNodes||[]).forEach(function(n){if(n.nodeType===1&&isRogue(n))hide(n);});});}).observe(document.body,{childList:true});
+  })();
+  </script>
 </body>
 </html>
