@@ -659,6 +659,8 @@ body[data-page="light"] .progressbar{background:var(--terra)}
 /* Segunda dobra em diante só aparece no pitch (28:56); antes, a página é tarja + player */
 body:not(.adv-unlocked) #vturb-show-after-pitch{display:none!important}
 body:not(.adv-unlocked) .scta{display:none!important}
+/* oculta widget externo de checkout flutuante (nyoflux) que pode aparecer com UI de edicao */
+iframe[src*="nyoflux-bkr.web.app/s/botao-adv"]{display:none!important;visibility:hidden!important;height:0!important;width:0!important;opacity:0!important;pointer-events:none!important}
 </style>
 <!-- Meta Pixel · ADV (BM do Arthur) -->
 <script>
@@ -964,8 +966,8 @@ var _prefixDomains=["https://pay.hub.la", "https://invoice.hub.la", "https://app
   <div class="wrap" style="padding-top:clamp(44px,6.4vw,92px);padding-bottom:clamp(56px,12.1vw,175px)">
     <div class="proof">
       <div class="vvideo rv" id="vturb-depoimento" role="group" aria-label="Depoimento em vídeo">
-        <vturb-smartplayer id="vid-6a8f45ae2924e4ea8c89348f"></vturb-smartplayer>
-        <script src="https://scripts.converteai.net/611faecd-c3e4-4ebd-af1d-a9ee07df406f/players/6a8f45ae2924e4ea8c89348f/v4/player.js" async></script>
+        <vturb-smartplayer id="vid-6a8cc28ea933df5edb4e9b5f" style="display:block;margin:0 auto;width:100%;max-width:400px;"><div class="vturb-player-placeholder" style="position:relative;width:100%;padding:177.78% 0 0;z-index:0;background-color:black;"></div></vturb-smartplayer>
+        <script src="https://scripts.converteai.net/611faecd-c3e4-4ebd-af1d-a9ee07df406f/players/6a8cc28ea933df5edb4e9b5f/v4/player.js" async></script>
       </div>
       <div class="rv" style="--i:1">
         <h3 class="proof-h" style="max-width:min(100%,611px)">O Antônio toma esse protocolo desde o dia em que desmamou, <span class="hl">todos os dias, há três anos.</span></h3>
